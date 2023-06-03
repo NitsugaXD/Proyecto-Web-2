@@ -10,14 +10,14 @@ def lck(request):
     context={}
     return render(request, 'wikiFaker/lck.html',context)
 
-def lck(request):
+def quizgeng(request):
     context={}
-    return render(request, 'wikiFaker/lck.html',context)
+    return render(request, 'wikiFaker/quiz_Gen.G.html',context)
 
-def lck(request):
+def quiz(request):
     context={}
-    return render(request, 'wikiFaker/lck.html',context)
+    return render(request, 'wikiFaker/quiz.html',context)
 
-def lck(request):
+def t1(request):
     context={}
-    return render(request, 'wikiFaker/lck.html',context)
+    return render(request, 'wikiFaker/t1.html',context)
