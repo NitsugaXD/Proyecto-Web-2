@@ -4,20 +4,20 @@ from django.shortcuts import render
 
 def inicio(request):
     context={}
-    return render(request, 'wikiFaker/inicio.html',context)
+    return render(request, 'inicio.html',context)
 
 def lck(request):
     context={}
-    return render(request, 'wikiFaker/lck.html',context)
+    return render(request, 'lck.html',context)
 
 def quizgeng(request):
     context={}
-    return render(request, 'wikiFaker/quiz_Gen.G.html',context)
+    return render(request, 'quiz_Gen.G.html',context)
 
 def quiz(request):
     context={}
-    return render(request, 'wikiFaker/quiz.html',context)
+    return render(request, 'quiz.html',context)
 
 def t1(request):
     context={}
-    return render(request, 'wikiFaker/t1.html',context)
+    return render(request, 't1.html',context)
