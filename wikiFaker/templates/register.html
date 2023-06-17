@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Registro</h1>
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Nombre de usuario</label>
+            <input type="text" name="usuario" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="genero">Genero</label>
+            <select name="genero">
+                {% for genero in generos  %}
+                    <option value="{{ genero.id_genero }}"> {{ genero.genero }} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" class="form-control" name="correo">
+        </div>
+        <div class="form-group">
+            <label for="password1">Contraseña</label>
+            <input type="password" class="form-control" name="contraseña">
+        </div>
+        <input type="submit" name="opcion" value="Registrarse" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}
+<div style=" text-align: center;">
+        
+    <h2>Formulario CRUD para Alumnos</h2><br>
+    <form action="{% url 'alumnosAdd' %}" method="POST">
+        {% csrf_token %}
+        <pre>Rut:               <input type="text" name="rut"></pre>
+        <pre>Nombre:            <input type="text" name="nombre"></pre>
+        <pre>Apellido P.:       <input type="text" name="paterno"></pre>
+        <pre>Apellido M.:       <input type="text" name="materno"></pre>
+        <pre>Fecha Nac:         <input type="date" name="fechaNac"></pre>
+        <pre>Género:            <select name="genero">
+            {% for genero in generos  %}
+                <option value="{{ genero.id_genero }}"> {{ genero.genero }} </option>
+            {% endfor %}
+        </select></pre>
+        <pre>Celular:           <input type="text" name="telefono"></pre>
+        <pre>Email:             <input type="text" name="email"></pre>
+        <pre>Dirección:         <input type="text" name="direccion"></pre>
+       
+
+        <input type="submit" name="opcion" value="Agregar">
+    
+        </form> <br><br>
+
+        <a href="{% url 'crud' %}"> Volver </a>
+        <br>
+
+        <div id="idMensajes">
+            {% if mensaje %}
+                {{mensaje}}
+            {% endif %}
+        </div>
+
+     
+</div>
