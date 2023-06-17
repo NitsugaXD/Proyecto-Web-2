@@ -129,3 +129,79 @@ $(document).ready(function() {
 });
 
 
+document.getElementById("register").addEventListener("submit", function (event) {
+
+  event.preventDefault();
+
+  // HACER VALIDACIONES ANTES DE ENVIAR LA INFORMACION UTILIZANDO FETCH AL SERVIDOR.
+  // Ejemplo:
+
+  var txtusuario = $("#usuario").val().trim();
+
+  if(txtusuario === ""){
+    alert("El elemento está vacío");
+    return;
+  }
+  if (txtusuario < 5){
+    alert("El elemento está vacío");
+    return;
+  }
+  
+  
+  var csrfToken = getCookie('csrftoken'); // Obtener el valor del token CSRF desde la cookie
+  var formData = new FormData();
+  formData.append("genero", valorGenero);
+
+  fetch("generosAdd", {
+    method: "POST",
+    headers: {
+      "X-CSRFToken": csrfToken // Agregar el token CSRF al encabezado
+    },
+    body: formData
+  })
+    .then(function (response) {
+      console.log(response); // imprimo la respuesta por consola.
+
+        // Si quieren recorrer e imprimir todo el json clave por clave:
+        $.each(response, function (key, value) {
+        console.log("Key: " + key + ", Value: " + value);
+      });
+
+      var keyToSearch = "status"; // Clave http a buscar en el json
+      var searchedValue = response[keyToSearch]; // Acceso con notación de corchetes
+
+      if (searchedValue !== undefined && searchedValue == "200") { // si existe la clave llamada "status" y si esta tiene valor 200
+        
+        
+        alert("Insercion correcta."); // aca pueden mostrar una alerta y luego hacer un redireccionamiento.
+
+        window.location.href = "index"; //Redireccionamiento a index
+
+      } else {
+        console.log("La clave no existe"); // No existe la clave en la respuesta.
+        return;
+      }
+
+
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
+
+
+
+function getCookie(name) {
+  var cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+};
