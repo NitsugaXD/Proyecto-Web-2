@@ -16,17 +16,30 @@ body {
   
 
 form {
-	
+	opacity: 0.9;
 	background-color: #f1ecec;
 	background-size: cover;
 	background-position: center;
+	width: 1100px;
 }
 
 p {
 	font-weight: bold;
+	margin-left: 10px;
 }
 
 input[type=radio] {
-	margin-left: 10px;}
+	margin-left: 15px;
+	margin-right: 20px;;}
 
+.btn {
 
+		margin-left: 25%;
+	}
+	.container{
+		justify-content: center;
+	}
+	#boton1{
+		width: 550px;
+		background-position: center;
+	}

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+	{%load  static%}
 <head>
 	<meta charset="UTF-8">
 	<title>Quiz Wiki</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/hoja_de_stilo_quiz.css">
+	<link rel="stylesheet" href="{% static 'css/hoja_de_stilo_quiz.css'%}">
 	<link rel="website icon" type="png"
-	href="img/Imagen_Equipos/Gen_logo.png">
+	href="{% static 'img/Imagen_Equipos/Gen_logo.png'%}">
 </head>
 <body>
 	<header>
@@ -104,9 +105,9 @@
 
 
 
-
-				  
-					<button type="submit">Enviar</button>
+					<button class="btn btn-primary" type="submit" id ="boton1">Enviar</button>
+					<br>
+						<br>
 				  </form>
 
 
@@ -121,6 +122,6 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<script src="js/index.js"></script>
+<script src="{%static 'js/index.js' %}"></script>
 </body>
 </html>
