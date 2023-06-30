@@ -1,6 +1,9 @@
-from django.shortcuts import render
-from .models import usuario as XD, Genero
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
+from .models import usuario as Usuarios, Genero 
+from django.contrib.auth import authenticate, login
+from .forms import CustomUserCreationForm
+from django.contrib import messages
+
 
 # Create your views here.
 
@@ -24,32 +27,18 @@ def t1(request):
     context={}
     return render(request, 't1.html',context)
 
-
-def login(request):
-    
-        return render(request, 'login.html')
-
 def register(request):
-    if request.method != "POST":
-        # no es un POST por lo tanto se muestra el formulario para agregar
-        generos = Genero.objects.all()
-        context = {"generos": generos}
-        return render(request, 'register.html', context)
-    else:
-        print("--->>>> llego al else de addAlumnos crea el objeto ")
-        # Es un POST, por lo tanto se recuperan los datos del formulario
-        # y se graban en la tabla
-        usuario = request.POST["usuario"]
-        genero = request.POST["genero"]
-        correo = request.POST["correo"]
-        contraseña= request.POST["contraseña"]
-        
-        objGenero = Genero.objects.get(id_genero=genero)
-        obj = XD.objects.create(
-                                    usuario=usuario,
-                                    id_genero=objGenero,
-                                    correo=correo,
-                                    contraseña=contraseña)
-        obj.save()
-        context = {"mensaje": "OK, datos grabados..."}
-        return render(request, 'register.html', context)
+    context={}
+    data = {
+        'form':CustomUserCreationForm()
+    }
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
+            login(request,user)
+            messages.success(request,"Registro completado")
+            return redirect(to="/")
+        data["form"]=formulario
+    return render(request, 'registration/register.html',data)
